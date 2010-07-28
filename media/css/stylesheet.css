@@ -13,7 +13,7 @@ body {
   font-family: "DejaVu Sans", "Bitstream Vera Sans", sans-serif;
   /*Pr
 efer Free Fonts*/
-    background: #fff url('image.png') no-repeat 10px 7px;
+    background: #fff url('../img/debian-title.png') no-repeat 10px 7px;
   color: #000;
   font-size: 100%;
 }
