@@ -80,6 +80,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+
+    'live_studio_www.auth',
 ]
 
 try:
