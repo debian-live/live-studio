@@ -10,6 +10,6 @@ def configs(request):
 def view(request, config_id):
     c = get_object_or_404(Config, pk=config_id, user=request.user)
 
-    return render_response(request, 'config/config.html', {
+    return render_response(request, 'config/view.html', {
         'config': c,
     })
