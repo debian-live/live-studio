@@ -74,9 +74,16 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-)
+]
+
+try:
+    import django_extensions
+
+    INSTALLED_APPS.append('django_extensions')
+except ImportError:
+    pass
