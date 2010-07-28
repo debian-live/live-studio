@@ -82,4 +82,4 @@ class Config(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'config:config', (self.pk,)
+        return 'config:view', (self.pk,)

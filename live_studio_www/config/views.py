@@ -7,7 +7,7 @@ from .models import Config
 def configs(request):
     return render_response(request, 'config/configs.html')
 
-def config(request, config_id):
+def view(request, config_id):
     c = get_object_or_404(Config, pk=config_id, user=request.user)
 
     return render_response(request, 'config/config.html', {
