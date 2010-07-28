@@ -4,20 +4,19 @@ from django.shortcuts import get_object_or_404
 from live_studio_www.utils import render_response
 
 from .forms import ConfigForm
-from .models import Config
 
 def configs(request):
     return render_response(request, 'config/configs.html')
 
 def view(request, config_id):
-    c = get_object_or_404(Config, pk=config_id, user=request.user)
+    config = get_object_or_404(request.user.configs, pk=config_id)
 
     return render_response(request, 'config/view.html', {
-        'config': c,
+        'config': config,
     })
 
 def edit(request, config_id):
-    config = get_object_or_404(Config, pk=config_id, user=request.user)
+    config = get_object_or_404(request.user.configs, pk=config_id)
 
     if request.method == 'POST':
         form = ConfigForm(request.POST, instance=config)
