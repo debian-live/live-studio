@@ -1,5 +1,7 @@
 # Django settings for live_studio_www project.
 
+from os.path import dirname, join, abspath
+
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -63,7 +65,5 @@ TEMPLATE_LOADERS = (
 ROOT_URLCONF = 'live_studio_www.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    join(dirname(dirname(dirname(dirname(abspath(__file__))))), 'templates'),
 )
