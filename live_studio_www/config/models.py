@@ -79,3 +79,7 @@ class Config(models.Model):
 
     def __unicode__(self):
         return "%s: name=%s" % (self.user.username, self.name)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'config:config', (self.pk,)
