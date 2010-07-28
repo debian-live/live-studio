@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add new configuration</h1>
+
+<p>Step {{ step }} of {{ step_count }}</p>
+<form action="" method="POST">{% csrf_token %}
+
+<table>
+{% block add-content %}{{ form }}{% endblock %}
+</table>
+
+<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+{{ previous_fields|safe }}
+<input type="submit" value="Next">
+</form>
+
+{% endblock %}

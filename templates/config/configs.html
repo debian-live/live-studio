@@ -3,6 +3,8 @@
 {% block content %}
 <h1>List of configurations</h1>
 
+<p><strong><a href="{% url config:add %}">Add new configuration</a></strong></p>
+
 <table>
 
 {% for config in request.user.configs.all %}
