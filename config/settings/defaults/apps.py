@@ -6,6 +6,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     'live_studio_www.auth',
+    'live_studio_www.utils',
     'live_studio_www.debug',
     'live_studio_www.config',
     'live_studio_www.static',
