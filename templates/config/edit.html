@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Editing config: <em>{{ config.name }}</em></h1>
+
+<form method="POST" action="">
+<table>
+{{ form }}
+</table>
+
+<input type="Submit" value="Save">
+
+</form>
+
+{% endblock %}

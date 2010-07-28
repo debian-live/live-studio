@@ -4,6 +4,8 @@
 
 <h1>Config: <em>{{ config.name }}</em></h1>
 
+<p><a href="{% url config:edit config.pk %}">Edit</a></p>
+
 <dl>
 <dt>Distribution</dt>
 <dd>{{ config.base }}</dd>
