@@ -1,0 +1,8 @@
+Source: live-studio
+Section: web
+Priority: optional
+Maintainer: debian-live <debian-live@lists.debian.org>
+
+Package: live-studio-www
+Architecture: all
+Description: Web pages etc. for live-studio
