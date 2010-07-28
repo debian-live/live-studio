@@ -7,6 +7,7 @@ INSTALLED_APPS = [
 
     'live_studio_www.auth',
     'live_studio_www.static',
+    'live_studio_www.templatetags',
 ]
 
 try:
