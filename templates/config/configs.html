@@ -5,7 +5,7 @@
 
 <table>
 
-{% for config in configs %}
+{% for config in request.user.configs.all %}
 <tr>
  <td><a href="{{ config.get_absolute_url }}">{{ config.name }}</td>
 </tr>
