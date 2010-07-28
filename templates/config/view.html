@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<p><a href="{% url config:configs %}">&laquo; Back to list of configurations</a></p>
+
 <h1>Config: <em>{{ config.name }}</em></h1>
 
 <p><a href="{% url config:edit config.pk %}">Edit</a></p>
