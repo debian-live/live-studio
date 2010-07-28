@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>List of configurations</h1>
+
+<table>
+
+{% for config in configs %}
+<tr>
+ <td><a href="{{ config.get_absolute_url }}">{{ config.name }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}
