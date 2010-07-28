@@ -1,7 +1,5 @@
 # Django settings for live_studio_www project.
 
-from os.path import dirname, join, abspath
-
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -39,10 +37,6 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
-
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -51,7 +45,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/admin/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'st3nklmujoic*e63$^7*f6d^0i*zva4^80^65=wm7fbb4a4i$p'
@@ -63,7 +57,3 @@ TEMPLATE_LOADERS = (
 )
 
 ROOT_URLCONF = 'live_studio_www.urls'
-
-TEMPLATE_DIRS = (
-    join(dirname(dirname(dirname(dirname(abspath(__file__))))), 'templates'),
-)
