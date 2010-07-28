@@ -5,4 +5,5 @@ Maintainer: debian-live <debian-live@lists.debian.org>
 
 Package: live-studio-www
 Architecture: all
+Depends: python-django (>= 1.2)
 Description: Web pages etc. for live-studio
