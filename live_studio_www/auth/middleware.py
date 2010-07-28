@@ -6,6 +6,7 @@ class RequireLoginMiddleware(object):
         '/admin/',
         '/media/',
         '/__debug__/',
+        '/favicon.ico',
     )
 
     def process_view(self, request, fn, *args, **kwargs):
