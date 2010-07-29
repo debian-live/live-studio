@@ -5,13 +5,19 @@ import shutil
 import logging
 import datetime
 import tempfile
-import traceback
 import subprocess
 
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
 from live_studio.build.models import Build
+from live_studio.templatetags.text import command_line_options
+
+def call(logfile, args):
+    logfile.write('# %s\n' % command_line_options(args))
+    p = subprocess.Popen(args, stdout=logfile, stderr=logfile)
+    p.wait()
+    assert p.returncode == 0
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -30,12 +36,17 @@ class Command(NoArgsCommand):
                     Build.objects.filter(pk=build.pk).update(**kwargs)
 
                 update(started=datetime.datetime.utcnow())
+
                 tempdir = tempfile.mkdtemp(prefix='live-studio_')
+                target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
+
+                os.makedirs(target_dir)
+                logfile = open(os.path.join(target_dir, 'log.txt'), 'a')
 
                 self.log.info("Building #%d in %s", build.pk, tempdir)
 
                 try:
-                    filename = self.handle_build(build, tempdir)
+                    filename = self.handle_build(build, tempdir, target_dir, logfile)
 
                     update(
                         finished=datetime.datetime.utcnow(),
@@ -48,7 +59,7 @@ class Command(NoArgsCommand):
                     self.log.exception("#%d failed", build.pk)
                     continue
                 finally:
-                    self.clean(tempdir)
+                    self.clean(tempdir, logfile)
                     self.log.info("Finished processing #%d", build.pk)
 
             except IndexError:
@@ -58,13 +69,11 @@ class Command(NoArgsCommand):
                 except KeyboardInterrupt:
                     sys.exit(1)
 
-    def handle_build(self, build, tempdir):
+    def handle_build(self, build, tempdir, target_dir, logfile):
         os.chdir(tempdir)
-        subprocess.check_call(('lh', 'config') + build.config.options())
-        subprocess.check_call(('lh', 'build'))
 
-        target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
-        os.makedirs(target_dir)
+        call(logfile, ('lh', 'config') + build.config.options())
+        open('binary.iso', 'w').write('iso here') #call(logfile, ('lh', 'build'))
 
         for extension in ('iso', 'img'):
             if not os.path.exists('binary.%s' % extension):
@@ -80,7 +89,7 @@ class Command(NoArgsCommand):
 
         assert False, "Did not create any image"
 
-    def clean(self, tempdir):
+    def clean(self, tempdir, logfile):
         os.chdir(tempdir)
-        subprocess.call(('lh', 'clean', '--purge'))
+        call(logfile, ('lh', 'clean', '--purge'))
         shutil.rmtree(tempdir)
