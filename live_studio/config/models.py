@@ -96,6 +96,6 @@ class Config(models.Model):
             '--binary-images', self.media_type,
             '--debian-installer', self.installer,
             '--language', language,
-            '--bootappend_live',
+            '--bootappend-live',
                 'locale=%s keyb=%s' % (self.locale, self.keyboard_layout),
         )
