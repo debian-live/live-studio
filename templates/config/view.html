@@ -6,6 +6,10 @@
 
 <h1>Config: <em>{{ config.name }}</em></h1>
 
+<form action="{% url queue:enqueue config.pk %}" method="post">
+<input type="submit" value="Build">
+</form>
+
 <p><a href="{% url config:edit config.pk %}">Edit</a></p>
 
 <dl>
