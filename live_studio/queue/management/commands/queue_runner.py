@@ -2,7 +2,7 @@ import time
 
 from django.core.management.base import NoArgsCommand
 
-from live_studio_www.queue.models import Entry
+from live_studio.queue.models import Entry
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):

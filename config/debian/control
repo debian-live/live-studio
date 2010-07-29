@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: debian-live <debian-live@lists.debian.org>
 
-Package: live-studio-www
+Package: live-studio
 Architecture: all
 Depends: python-django (>= 1.2), python-psycopg2, python-memcache
 Description: Web pages etc. for live-studio

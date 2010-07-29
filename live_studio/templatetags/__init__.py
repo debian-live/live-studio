@@ -4,4 +4,4 @@ from .library import register
 
 import media
 
-add_to_builtins('live_studio_www.templatetags')
+add_to_builtins('live_studio.templatetags')

@@ -6,13 +6,13 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.messages',
 
-    'live_studio_www.auth',
-    'live_studio_www.utils',
-    'live_studio_www.debug',
-    'live_studio_www.queue',
-    'live_studio_www.config',
-    'live_studio_www.static',
-    'live_studio_www.templatetags',
+    'live_studio.auth',
+    'live_studio.utils',
+    'live_studio.debug',
+    'live_studio.queue',
+    'live_studio.config',
+    'live_studio.static',
+    'live_studio.templatetags',
 ]
 
 try:

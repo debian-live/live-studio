@@ -1,4 +1,4 @@
-# Django settings for live_studio_www project.
+# Django settings for live_studio project.
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -56,4 +56,4 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 )
 
-ROOT_URLCONF = 'live_studio_www.urls'
+ROOT_URLCONF = 'live_studio.urls'

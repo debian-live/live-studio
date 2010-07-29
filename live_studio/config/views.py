@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.formtools.wizard import FormWizard
 
-from live_studio_www.utils import render_response
+from live_studio.utils import render_response
 
 from .forms import ConfigForm, WIZARD_FORMS
 from .models import Config
