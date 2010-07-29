@@ -5,7 +5,7 @@ from django.db import models
 from .managers import BuildManager
 
 class Build(models.Model):
-    config = models.ForeignKey('config.Config')
+    config = models.ForeignKey('config.Config', related_name='builds')
 
     enqueued = models.DateTimeField(default=datetime.datetime.utcnow)
     started = models.DateTimeField(null=True)

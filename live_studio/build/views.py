@@ -3,13 +3,11 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 
-from .models import Build
-
 @require_POST
 def enqueue(request, config_id):
     config = get_object_or_404(request.user.configs, pk=config_id)
 
-    Build.objects.create(config=config)
+    config.builds.create()
 
     messages.add_message(request, messages.INFO, 'Enqueued.')
 
