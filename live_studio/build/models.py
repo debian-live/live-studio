@@ -31,5 +31,8 @@ class Build(models.Model):
             return 'building'
         return 'waiting'
 
+    def log_url(self):
+        return '%s/%s/log.txt' % (settings.BUILDS_URL, self.ident)
+
     def result_url(self):
         return '%s/%s/%s' % (settings.BUILDS_URL, self.ident, self.filename)
