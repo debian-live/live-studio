@@ -10,6 +10,38 @@
 <input type="submit" value="Build">
 </form>
 
+<table cellpadding="5">
+<tr>
+  <th>#</th>
+  <th>Enqueued</th>
+  <th>Status</th>
+</tr>
+{% for build in config.builds.all %}
+<tr>
+  <td>{{ build.pk }}</td>
+  <td>{{ build.enqueued|timesince }} ago</td>
+  <td>
+  	{% if build.status == "waiting"%}
+      <em>Waiting for builder to become available..</em>
+    {% endif %}
+
+  	{% if build.status == "building"%}
+      <em>Building...</em> ({{ build.started|timesince }})
+    {% endif %}
+
+  	{% if build.status == "failure"%}
+      <strong>Build failed!</strong>
+    {% endif %}
+
+  	{% if build.status == "success"%}
+      <strong>Finished.</strong>
+    {% endif %}
+
+  </td>
+</tr>
+{% endfor %}
+</table>
+
 <p><a href="{% url config:edit config.pk %}">Edit</a></p>
 
 <dl>

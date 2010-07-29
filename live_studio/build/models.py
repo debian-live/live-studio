@@ -20,3 +20,12 @@ class Build(models.Model):
 
     class Meta:
         ordering = ('-enqueued',)
+
+    def status(self):
+        if self.filename:
+            return 'success'
+        if self.finished:
+            return 'failure'
+        if self.started:
+            return 'building'
+        return 'waiting'
