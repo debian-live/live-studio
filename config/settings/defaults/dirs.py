@@ -9,3 +9,5 @@ TEMPLATE_DIRS = (
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = join(LIVE_STUDIO_BASE, 'media')
+
+BUILDS_DIR = join(LIVE_STUDIO_BASE, 'builds')
