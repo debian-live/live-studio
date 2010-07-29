@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.formtools.wizard import FormWizard
 
@@ -25,6 +26,8 @@ def edit(request, config_id):
 
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Configuration saved.')
+
             return HttpResponseRedirect(config.get_absolute_url())
     else:
         form = ConfigForm(instance=config)
@@ -42,6 +45,9 @@ class NewConfigWizard(FormWizard):
 
         config = Config(user=request.user, **data)
         config.save()
+
+        messages.add_message(request, messages.INFO,
+            'New configuration added.')
 
         return HttpResponseRedirect(config.get_absolute_url())
 
