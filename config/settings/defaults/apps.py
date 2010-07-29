@@ -7,9 +7,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'live_studio.auth',
+    'live_studio.build',
     'live_studio.utils',
     'live_studio.debug',
-    'live_studio.queue',
     'live_studio.config',
     'live_studio.static',
     'live_studio.templatetags',
