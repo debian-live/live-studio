@@ -1,0 +1,10 @@
+
+Hi!
+
+Please activate your Debian Live Studio account by visiting
+the following URL:
+
+  http://{{ site.domain }}/{% url registration_activate activation_key %}
+
+
+-- Debian Live Studio

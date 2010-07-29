@@ -6,6 +6,8 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.messages',
 
+    'registration',
+
     'live_studio.auth',
     'live_studio.build',
     'live_studio.utils',
