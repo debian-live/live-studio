@@ -14,7 +14,8 @@ from live_studio.build.models import Build
 from live_studio.templatetags.text import command_line_options
 
 def call(logfile, args):
-    logfile.write('# %s\n' % command_line_options(args))
+    logfile.write('$ %s\n' % command_line_options(args))
+    logfile.flush()
     p = subprocess.Popen(args, stdout=logfile, stderr=logfile)
     p.wait()
     assert p.returncode == 0
