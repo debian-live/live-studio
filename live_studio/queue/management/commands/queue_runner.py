@@ -1,5 +1,7 @@
 import time
+import shutil
 import datetime
+import tempfile
 import traceback
 
 from django.core.management.base import NoArgsCommand
@@ -20,18 +22,21 @@ class Command(NoArgsCommand):
 
                 update(started=datetime.datetime.utcnow())
 
+                tempdir = tempfile.mkdtemp(prefix='live-studio_')
+
                 try:
-                    self.handle_entry(entry)
+                    self.handle_entry(entry, tempdir)
                     update(success=True)
                 except:
                     traceback.print_exc()
                     continue
                 finally:
                     update(finished=datetime.datetime.utcnow())
+                    shutil.rmtree(tempdir)
 
             except IndexError:
                 time.sleep(2)
 
-    def handle_entry(self, entry):
+    def handle_entry(self, entry, tempdir):
         # Process 'entry' here
         pass
