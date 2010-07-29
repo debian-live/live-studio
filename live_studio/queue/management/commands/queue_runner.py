@@ -1,9 +1,12 @@
+import os
+import sys
 import time
 import shutil
 import logging
 import datetime
 import tempfile
 import traceback
+import subprocess
 
 from django.core.management.base import NoArgsCommand
 
@@ -39,13 +42,23 @@ class Command(NoArgsCommand):
                     self.log.exception("Entry #%d failed", entry.pk)
                     continue
                 finally:
-                    shutil.rmtree(tempdir)
+                    self.clean(tempdir)
                     self.log.info("Finished processing #%d", entry.pk)
 
             except IndexError:
                 self.log.debug('No items in queue, sleeping for 2s')
-                time.sleep(2)
+
+                try:
+                    time.sleep(2)
+                except KeyboardInterrupt:
+                    sys.exit(1)
 
     def handle_entry(self, entry, tempdir):
-        # Process 'entry' here
-        pass
+        os.chdir(tempdir)
+        subprocess.check_call(('lh', 'config') + entry.config.options())
+        subprocess.check_call(('lh', 'build'))
+
+    def clean(self, tempdir):
+        os.chdir(tempdir)
+        subprocess.call(('lh', 'clean', '--purge'))
+        shutil.rmtree(tempdir)
