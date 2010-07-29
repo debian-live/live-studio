@@ -16,3 +16,4 @@ class Entry(models.Model):
 
     class Meta:
         ordering = ('-enqueued',)
+        verbose_name_plural = 'Entries'
