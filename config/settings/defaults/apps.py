@@ -8,6 +8,7 @@ INSTALLED_APPS = [
     'live_studio_www.auth',
     'live_studio_www.utils',
     'live_studio_www.debug',
+    'live_studio_www.queue',
     'live_studio_www.config',
     'live_studio_www.static',
     'live_studio_www.templatetags',
