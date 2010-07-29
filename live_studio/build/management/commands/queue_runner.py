@@ -47,7 +47,6 @@ class Command(NoArgsCommand):
 
             except IndexError:
                 self.log.debug('No items in queue, sleeping for 2s')
-
                 try:
                     time.sleep(2)
                 except KeyboardInterrupt:
