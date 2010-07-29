@@ -5,6 +5,7 @@ class RequireLoginMiddleware(object):
     ALLOW = (
         '/admin/',
         '/media/',
+        '/accounts/',
         '/__debug__/',
         '/favicon.ico',
     )
