@@ -9,7 +9,7 @@ if settings.DEBUG:
         (r'^media/(?P<path>.*)$', 'serve',
             {'document_root': settings.MEDIA_ROOT}),
         (r'^builds/(?P<path>.*)$', 'serve',
-            {'document_root': settings.BUILDS_DIR}),
+            {'document_root': settings.BUILDS_ROOT}),
         (r'^(?P<path>favicon.ico|robots\.txt)$', 'serve',
             {'document_root': settings.MEDIA_ROOT}),
     )

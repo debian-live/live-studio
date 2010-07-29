@@ -63,7 +63,7 @@ class Command(NoArgsCommand):
         subprocess.check_call(('lh', 'config') + build.config.options())
         subprocess.check_call(('lh', 'build'))
 
-        target_dir = os.path.join(settings.BUILDS_DIR, build.ident)
+        target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
         os.makedirs(target_dir)
 
         for extension in ('iso', 'img'):

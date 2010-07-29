@@ -10,5 +10,5 @@ TEMPLATE_DIRS = (
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = join(LIVE_STUDIO_BASE, 'media')
 
-BUILDS_DIR = join(LIVE_STUDIO_BASE, 'builds')
-BUILDS_DIR_WWW = '/builds'
+BUILDS_ROOT = join(LIVE_STUDIO_BASE, 'builds')
+BUILDS_URL = '/builds'
