@@ -10,7 +10,7 @@ import subprocess
 
 from django.core.management.base import NoArgsCommand
 
-from live_studio.queue.models import Entry
+from live_studio.build.models import Build
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -22,28 +22,28 @@ class Command(NoArgsCommand):
 
         while True:
             try:
-                entry = Entry.objects.pop()
+                build = Build.objects.pop()
 
                 def update(**kwargs):
-                    self.log.debug('Updating #%d with %r', entry.pk, kwargs)
-                    Entry.objects.filter(pk=entry.pk).update(**kwargs)
+                    self.log.debug('Updating #%d with %r', build.pk, kwargs)
+                    Build.objects.filter(pk=build.pk).update(**kwargs)
 
                 update(started=datetime.datetime.utcnow())
                 tempdir = tempfile.mkdtemp(prefix='live-studio_')
 
-                self.log.info("Building #%d in %s", entry.pk, tempdir)
+                self.log.info("Building #%d in %s", build.pk, tempdir)
 
                 try:
-                    self.handle_entry(entry, tempdir)
+                    self.handle_build(build, tempdir)
                     update(finished=datetime.datetime.utcnow(), success=True)
-                    self.log.info("Entry #%d built successfully", entry.pk)
+                    self.log.info("#%d built successfully", build.pk)
                 except:
                     update(finished=datetime.datetime.utcnow())
-                    self.log.exception("Entry #%d failed", entry.pk)
+                    self.log.exception("#%d failed", build.pk)
                     continue
                 finally:
                     self.clean(tempdir)
-                    self.log.info("Finished processing #%d", entry.pk)
+                    self.log.info("Finished processing #%d", build.pk)
 
             except IndexError:
                 self.log.debug('No items in queue, sleeping for 2s')
@@ -53,9 +53,9 @@ class Command(NoArgsCommand):
                 except KeyboardInterrupt:
                     sys.exit(1)
 
-    def handle_entry(self, entry, tempdir):
+    def handle_build(self, build, tempdir):
         os.chdir(tempdir)
-        subprocess.check_call(('lh', 'config') + entry.config.options())
+        subprocess.check_call(('lh', 'config') + build.config.options())
         subprocess.check_call(('lh', 'build'))
 
     def clean(self, tempdir):
