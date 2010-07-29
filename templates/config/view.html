@@ -35,6 +35,7 @@
 
   	{% if build.status == "success"%}
       <strong>Finished.</strong>
+      <a href="{{ settings.BUILDS_DIR_WWW }}/{{ build.ident }}/{{ build.filename }}">Download</a>
     {% endif %}
 
   </td>

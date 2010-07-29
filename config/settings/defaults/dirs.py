@@ -11,3 +11,4 @@ TEMPLATE_DIRS = (
 MEDIA_ROOT = join(LIVE_STUDIO_BASE, 'media')
 
 BUILDS_DIR = join(LIVE_STUDIO_BASE, 'builds')
+BUILDS_DIR_WWW = '/builds'
