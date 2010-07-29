@@ -82,3 +82,20 @@ class Config(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'config:view', (self.pk,)
+
+    def options(self):
+        try:
+            language = self.locale.split('_')[0]
+        except:
+            language = 'en'
+
+        return (
+            '--architecture', self.architecture,
+            '--packages-lists', self.base,
+            '--distribution', self.distribution,
+            '--binary-images', self.media_type,
+            '--debian-installer', self.installer,
+            '--language', language,
+            '--bootappend_live',
+                'locale=%s keyb=%s' % (self.locale, self.keyboard_layout),
+        )
