@@ -4,6 +4,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django.contrib.messages',
 
     'live_studio_www.auth',
     'live_studio_www.utils',
