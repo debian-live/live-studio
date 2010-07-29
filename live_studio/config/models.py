@@ -42,7 +42,6 @@ class Config(models.Model):
         choices=(
             ('iso',     'ISO image for a CD or DVD'),
             ('usb-hdd', 'USB / HDD image'),
-            ('net',     'Network boot image'),
         )
     )
 
