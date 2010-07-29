@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Entry
+from .models import Build
 
-class EntryAdmin(admin.ModelAdmin):
+class BuildAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Entry, EntryAdmin)
+admin.site.register(Build, BuildAdmin)
