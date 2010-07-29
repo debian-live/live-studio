@@ -4,4 +4,5 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 
     'live_studio_www.auth.middleware.RequireLoginMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
 )
