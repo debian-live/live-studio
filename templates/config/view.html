@@ -27,15 +27,18 @@
 
   	{% if build.status == "building"%}
       <em>Building...</em> ({{ build.started|timesince }})
+      <a href="{{ build.log_url}}">Log</a>
     {% endif %}
 
   	{% if build.status == "failure"%}
-      <strong>Build failed!</strong>
+      <strong>Build failed!</strong> 
+      <a href="{{ build.log_url}}">Log</a>
     {% endif %}
 
   	{% if build.status == "success"%}
       <strong>Finished.</strong>
       <a href="{{ build.result_url}}">Download</a>
+      <a href="{{ build.log_url}}">Log</a>
     {% endif %}
 
   </td>
