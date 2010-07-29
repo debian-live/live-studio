@@ -45,7 +45,26 @@ class Command(NoArgsCommand):
                 self.log.info("Building #%d in %s", build.pk, tempdir)
 
                 try:
-                    filename = self.handle_build(build, tempdir, target_dir, logfile)
+                    os.chdir(tempdir)
+
+                    call(logfile, ('lh', 'config') + build.config.options())
+                    open('binary.iso', 'w').write('iso here') #call(logfile, ('lh', 'build'))
+
+                    # Find file that was created
+                    filename = None
+                    for extension in ('iso', 'img'):
+                        if not os.path.exists('binary.%s' % extension):
+                            continue
+
+                        filename = '%s.%s' % (build.ident, extension)
+                        os.rename(
+                            'binary.%s' % extension,
+                            os.path.join(target_dir, filename),
+                        )
+
+                        break
+
+                    assert filename, "Did not create any image"
 
                     update(
                         finished=datetime.datetime.utcnow(),
@@ -58,7 +77,10 @@ class Command(NoArgsCommand):
                     self.log.exception("#%d failed", build.pk)
                     continue
                 finally:
-                    self.clean(tempdir, logfile)
+                    os.chdir(tempdir)
+                    call(logfile, ('lh', 'clean', '--purge'))
+                    shutil.rmtree(tempdir)
+
                     self.log.info("Finished processing #%d", build.pk)
 
             except IndexError:
@@ -67,28 +89,3 @@ class Command(NoArgsCommand):
                     time.sleep(2)
                 except KeyboardInterrupt:
                     sys.exit(1)
-
-    def handle_build(self, build, tempdir, target_dir, logfile):
-        os.chdir(tempdir)
-
-        call(logfile, ('lh', 'config') + build.config.options())
-        open('binary.iso', 'w').write('iso here') #call(logfile, ('lh', 'build'))
-
-        for extension in ('iso', 'img'):
-            if not os.path.exists('binary.%s' % extension):
-                continue
-
-            filename = '%s.%s' % (build.ident, extension)
-            os.rename(
-                'binary.%s' % extension,
-                os.path.join(target_dir, filename),
-            )
-
-            return filename
-
-        assert False, "Did not create any image"
-
-    def clean(self, tempdir, logfile):
-        os.chdir(tempdir)
-        call(logfile, ('lh', 'clean', '--purge'))
-        shutil.rmtree(tempdir)
