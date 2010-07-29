@@ -2,6 +2,7 @@ import uuid
 import datetime
 
 from django.db import models
+from django.conf import settings
 
 from .managers import BuildManager
 
@@ -29,3 +30,6 @@ class Build(models.Model):
         if self.started:
             return 'building'
         return 'waiting'
+
+    def result_url(self):
+        return '%s/%s/%s' % (settings.BUILDS_URL, self.ident, self.filename)
