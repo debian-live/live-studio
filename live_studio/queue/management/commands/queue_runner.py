@@ -1,4 +1,5 @@
 import time
+import datetime
 
 from django.core.management.base import NoArgsCommand
 
@@ -10,9 +11,22 @@ class Command(NoArgsCommand):
 
         while True:
             try:
-                # Pop
-                entry = Entry.objects.all()[0]
-                self.handle_entry(entry)
+                entry = Entry.objects.pop()
+
+                def update(**kwargs):
+                    print entry.pk, kwargs
+                    Entry.objects.filter(pk=entry.pk).update(**kwargs)
+
+                update(started=datetime.datetime.utcnow())
+
+                try:
+                    self.handle_entry(entry)
+                    update(success=True)
+                except:
+                    continue
+                finally:
+                    update(finished=datetime.datetime.utcnow())
+
             except IndexError:
                 time.sleep(2)
 
