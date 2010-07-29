@@ -8,6 +8,7 @@ import tempfile
 import traceback
 import subprocess
 
+from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
 from live_studio.build.models import Build
@@ -34,8 +35,13 @@ class Command(NoArgsCommand):
                 self.log.info("Building #%d in %s", build.pk, tempdir)
 
                 try:
-                    self.handle_build(build, tempdir)
-                    update(finished=datetime.datetime.utcnow(), success=True)
+                    filename = self.handle_build(build, tempdir)
+
+                    update(
+                        finished=datetime.datetime.utcnow(),
+                        filename=filename,
+                    )
+
                     self.log.info("#%d built successfully", build.pk)
                 except:
                     update(finished=datetime.datetime.utcnow())
@@ -56,6 +62,23 @@ class Command(NoArgsCommand):
         os.chdir(tempdir)
         subprocess.check_call(('lh', 'config') + build.config.options())
         subprocess.check_call(('lh', 'build'))
+
+        target_dir = os.path.join(settings.BUILDS_DIR, build.ident)
+        os.makedirs(target_dir)
+
+        for extension in ('iso', 'img'):
+            if not os.path.exists('binary.%s' % extension):
+                continue
+
+            filename = '%s.%s' % (build.ident, extension)
+            os.rename(
+                'binary.%s' % extension,
+                os.path.join(target_dir, filename),
+            )
+
+            return filename
+
+        assert False, "Did not create any image"
 
     def clean(self, tempdir):
         os.chdir(tempdir)
