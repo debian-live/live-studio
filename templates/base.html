@@ -19,6 +19,15 @@
 {% endif %}
 
 <div id="body">
+
+  {% if request.user.is_authenticated %}
+  <div class="actions" style="float: right">
+    <p><a href="{% url config:configs %}">Home</a>
+    -
+    <a href="{% url auth_logout %}">Logout</a>
+  </div>
+  {% endif %}
+
 <div id="content">
   {% block content %}{% endblock %}
 </div>
