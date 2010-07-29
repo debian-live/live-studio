@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if account %}
+  <h1>Account validated</h1>
+  <p>You may now <a href="{% url auth_login %}">login</a> and start using your account.</p>
+{% else %}
+  <h1>Registration key invalid</h1>
+  <p>Did you copy it from the email correctly?</p>
+{% endif %}
+
+{% endblock %}
