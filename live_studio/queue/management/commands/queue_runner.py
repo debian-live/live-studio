@@ -1,5 +1,6 @@
 import time
 import datetime
+import traceback
 
 from django.core.management.base import NoArgsCommand
 
@@ -23,6 +24,7 @@ class Command(NoArgsCommand):
                     self.handle_entry(entry)
                     update(success=True)
                 except:
+                    traceback.print_exc()
                     continue
                 finally:
                     update(finished=datetime.datetime.utcnow())
