@@ -13,7 +13,8 @@ class Build(models.Model):
     enqueued = models.DateTimeField(default=datetime.datetime.utcnow)
     started = models.DateTimeField(null=True)
     finished = models.DateTimeField(null=True)
-    success = models.BooleanField(default=False)
+
+    filename = models.CharField(max_length=50)
 
     objects = BuildManager()
 
