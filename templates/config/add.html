@@ -4,7 +4,6 @@
 
 <h1>Add new configuration</h1>
 
-<p>Step {{ step }} of {{ step_count }}</p>
 <form action="" method="POST">{% csrf_token %}
 
 {% block add_content %}
@@ -17,5 +16,7 @@
 {{ previous_fields|safe }}
 <input type="submit" value="Next">
 </form>
+
+<p>Step {{ step }} of {{ step_count }}</p>
 
 {% endblock %}
