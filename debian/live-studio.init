@@ -43,7 +43,7 @@ case "$1" in
 			--user=${USER} \
 			--group=${GROUP} \
 			--bind=127.0.0.1:8000 \
-			--workers=4 \
+			--workers=2 \
 			--log-file=${LOGFILE} \
 			settings
 	then
