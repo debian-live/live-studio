@@ -31,7 +31,7 @@ case "$1" in
 		--quiet \
 		--umask 007 \
 		--pidfile ${PIDFILE} \
-		--exec ${DAEMON} -- queue_runner --pidfile ${PIDFILE}
+		--exec /usr/bin/python -- ${DAEMON} queue_runner --pidfile ${PIDFILE}
 	then
 		echo "$NAME."
 	else
