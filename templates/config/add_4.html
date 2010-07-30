@@ -1,1 +1,13 @@
 {% extends "config/add.html" %}
+
+{% block add_content %}
+
+<h2>Select Debian Installer integration</h2>
+
+<p>Selecting "<em>yes</em>" below adds additional boot options that launch the Debian Installer, the official installation system for Debian Systems.</p>
+
+<p>If unsure, select "<em>no</em>"</p>
+
+{{ form.installer }}
+
+{% endblock %}

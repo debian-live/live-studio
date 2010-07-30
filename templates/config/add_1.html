@@ -1,1 +1,13 @@
 {% extends "config/add.html" %}
+
+{% block add_content %}
+
+<h2>Select distribution</h2>
+
+<p>What distribution of Debian would you like to build?</p>
+
+<p>If unsure, select "<em>Stable (lenny)</em>"</p>
+
+{{ form.distribution }}
+
+{% endblock %}

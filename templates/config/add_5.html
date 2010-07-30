@@ -1,1 +1,15 @@
 {% extends "config/add.html" %}
+
+{% block add_content %}
+
+<h2>Select locale and keyboard layout</h2>
+
+<p>A locale is an identifer that defines, country and related formatting settings. If ensure, please use the defaults.</p>
+
+<table style="padding: 1em">
+{{ form }}
+</table>
+
+{% endblock %}
+
+{% block next %}Finish{% endblock %}
