@@ -18,7 +18,7 @@ NAME=live-studio-runner
 DESC=${NAME}
 PIDFILE=/var/run/${NAME}.pid
 
-test -x ${DAEMON} || exit 0
+test -e ${DAEMON} || exit 0
 
 set -e
 
