@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+rm -f /etc/nginx/sites-enabled/default
+ln -sf ../sites-available/live-studio-nginx /etc/nginx/sites-enabled
+
+invoke-rc.d nginx restart
+
+#DEBHELPER#

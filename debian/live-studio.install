@@ -1,2 +1,3 @@
 usr/
 media /usr/share/live-studio/htdocs
+config/live-studio-nginx /etc/nginx/sites-available
