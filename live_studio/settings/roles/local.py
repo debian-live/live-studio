@@ -9,3 +9,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = join(_BASE, 'media')
 BUILDS_ROOT = join(_BASE, 'builds')
 TEMPLATE_DIRS = (join(_BASE, 'templates'),)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
