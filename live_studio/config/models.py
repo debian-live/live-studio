@@ -56,11 +56,11 @@ class Config(models.Model):
 
     installer = models.CharField(
         max_length=4,
-        default='no',
+        default='false',
         choices=(
-            ('no',   'No installer integration'),
+            ('false', 'No installer integration'),
             ('live', '"Live" installer integration'),
-            ('yes',  'Standard installer integration'),
+            ('true', 'Standard installer integration'),
         )
     )
 
