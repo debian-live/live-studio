@@ -8,7 +8,7 @@ server {
 	}
 
 	location /admin/media {
-		root /usr/share/pyshared/django/contrib;
+		alias /usr/share/pyshared/django/contrib/admin/media;
 	}
 
 	location /builds {
