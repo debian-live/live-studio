@@ -48,7 +48,7 @@ class Command(NoArgsCommand):
                     self.log.debug('Updating #%d with %r', build.pk, kwargs)
                     Build.objects.filter(pk=build.pk).update(**kwargs)
 
-                update(started=datetime.datetime.utcnow())
+                update(started=datetime.datetime.now())
 
                 tempdir = tempfile.mkdtemp(prefix='live-studio_')
                 target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
@@ -85,13 +85,13 @@ class Command(NoArgsCommand):
                     assert filename, "Did not create any image"
 
                     update(
-                        finished=datetime.datetime.utcnow(),
+                        finished=datetime.datetime.now(),
                         filename=filename,
                     )
 
                     self.log.info("#%d built successfully", build.pk)
                 except:
-                    update(finished=datetime.datetime.utcnow())
+                    update(finished=datetime.datetime.now())
                     self.log.exception("#%d failed", build.pk)
                     continue
                 finally:

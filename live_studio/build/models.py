@@ -11,7 +11,7 @@ class Build(models.Model):
 
     config = models.ForeignKey('config.Config', related_name='builds')
 
-    enqueued = models.DateTimeField(default=datetime.datetime.utcnow)
+    enqueued = models.DateTimeField(default=datetime.datetime.now)
     started = models.DateTimeField(null=True)
     finished = models.DateTimeField(null=True)
 

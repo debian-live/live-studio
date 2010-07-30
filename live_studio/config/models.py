@@ -7,7 +7,7 @@ from live_studio import data
 
 class Config(models.Model):
     user = models.ForeignKey(User, related_name='configs')
-    created = models.DateTimeField(default=datetime.datetime.utcnow)
+    created = models.DateTimeField(default=datetime.datetime.now)
 
     name = models.CharField(
         max_length=150,
