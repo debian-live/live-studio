@@ -9,9 +9,21 @@ Standards-Version: 3.9.1
 Package: live-studio
 Architecture: all
 Depends: ${misc:Depends}, python-django (>= 1.2), python-psycopg2, python-memcache, python-django-registration
-Description: Web pages etc. for live-studio
+Description: Debian Live - Web based front-end
+ live-studio is a web frontend to the Debian Live tools. It offers users of any
+ operating system to customise, build and then download a Debian Live system
+ from anywhere on the internet. Configurations can be recalled on subsequent
+ visits.
+ .
+ This package contains the Django front-end.
 
 Package: live-studio-runner
 Architecture: all
 Depends: ${misc:Depends}, live-studio (= ${binary:Version}), python-daemon
-Description: Queue runner for live-studio
+Description: Debian Live - Web based front-end (queue runner)
+ live-studio is a web frontend to the Debian Live tools. It offers users of any
+ operating system to customise, build and then download a Debian Live system
+ from anywhere on the internet. Configurations can be recalled on subsequent
+ visits.
+ .
+ This package contains the queue runner responsible for building the images.
