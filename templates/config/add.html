@@ -7,9 +7,11 @@
 <p>Step {{ step }} of {{ step_count }}</p>
 <form action="" method="POST">{% csrf_token %}
 
+{% block add_content %}
 <table>
-{% block add-content %}{{ form }}{% endblock %}
+{{ form }}
 </table>
+{% endblock %}
 
 <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
 {{ previous_fields|safe }}
