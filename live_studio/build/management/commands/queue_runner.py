@@ -8,8 +8,9 @@ import shutil
 import logging
 import datetime
 import tempfile
-import lockfile
 import subprocess
+
+from daemon import pidlockfile
 
 from django.conf import settings
 from django.core.management.base import NoArgsCommand, make_option
@@ -28,14 +29,11 @@ class Command(NoArgsCommand):
     )
 
     def handle_noargs(self, **options):
-        if not options['pidfile']:
-            self.run(options)
-            return
+        if options['pidfile']:
+            pidfile = pidlockfile.PIDLockFile(options['pidfile'])
+            daemon.DaemonContext(pidfile=pidfile).open()
 
-        pidfile = lockfile.FileLock(options['pidfile'])
-
-        with daemon.DaemonContext(pidfile=pidfile):
-            self.run(options)
+        self.run(options)
 
     def run(self, options):
         logging.basicConfig(level=logging.INFO)
