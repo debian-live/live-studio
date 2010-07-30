@@ -20,7 +20,7 @@ GROUP=www-data
 RUNDIR=/usr/lib/pymodules/python2.5/live_studio/
 DAEMON=/usr/bin/gunicorn_django
 PIDFILE=/var/run/${NAME}.pid
-LOGFILE=/var/log/live-studio/gunicorn.log
+LOGFILE=/var/log/live-studio.log
 
 test -x ${DAEMON} || exit 0
 
