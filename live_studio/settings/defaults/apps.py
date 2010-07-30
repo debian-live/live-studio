@@ -23,3 +23,7 @@ for module in ('django_extensions', 'debug_toolbar'):
         INSTALLED_APPS.append(module)
     except ImportError:
         pass
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
