@@ -1,7 +1,8 @@
 Source: live-studio
 Section: web
 Priority: optional
-Maintainer: debian-live <debian-live@lists.debian.org>
+Maintainer: Debian Live Project <debian-live@lists.debian.org>
+Uploaders: Chris Lamb <lamby@debian.org>
 
 Package: live-studio
 Architecture: all
