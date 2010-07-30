@@ -8,10 +8,10 @@ Standards-Version: 3.9.1
 
 Package: live-studio
 Architecture: all
-Depends: python-django (>= 1.2), python-psycopg2, python-memcache, python-django-registration
+Depends: ${misc:Depends}, python-django (>= 1.2), python-psycopg2, python-memcache, python-django-registration
 Description: Web pages etc. for live-studio
 
 Package: live-studio-runner
 Architecture: all
-Depends: live-studio (= ${binary:Version}), python-daemon
+Depends: ${misc:Depends}, live-studio (= ${binary:Version}), python-daemon
 Description: Queue runner for live-studio
