@@ -66,7 +66,11 @@ class Command(NoArgsCommand):
                     os.chdir(tempdir)
 
                     call(logfile, ('lh', 'config') + build.config.options())
-                    open('binary.iso', 'w').write('iso here') #call(logfile, ('lh', 'build'))
+
+                    if settings.DEBUG:
+                        open('binary.iso', 'w').write('iso here')
+                    else:
+                        call(logfile, ('lh', 'build'))
 
                     # Find file that was created
                     filename = None
