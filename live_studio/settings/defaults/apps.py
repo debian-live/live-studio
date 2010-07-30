@@ -17,16 +17,9 @@ INSTALLED_APPS = [
     'live_studio.templatetags',
 ]
 
-try:
-    import django_extensions
-
-    INSTALLED_APPS.append('django_extensions')
-except ImportError:
-    pass
-
-try:
-    import debug_toolbar
-
-    INSTALLED_APPS.append('debug_toolbar')
-except ImportError:
-    pass
+for module in ('django_extensions', 'debug_toolbar'):
+    try:
+        __import__(module)
+        INSTALLED_APPS.append(module)
+    except ImportError:
+        pass
