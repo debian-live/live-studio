@@ -50,12 +50,6 @@ ADMIN_MEDIA_PREFIX = '/admin/media/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'st3nklmujoic*e63$^7*f6d^0i*zva4^80^65=wm7fbb4a4i$p'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-)
-
 ROOT_URLCONF = 'live_studio.urls'
 
 LOGIN_REDIRECT_URL = '/configs'
