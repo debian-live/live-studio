@@ -1,14 +1,6 @@
-from os.path import dirname, join, abspath
+TEMPLATE_DIRS = ('/usr/share/live-studio/templates',)
 
-LIVE_STUDIO_BASE = dirname(dirname(dirname(dirname(abspath(__file__)))))
+MEDIA_ROOT = '/usr/share/live-studio/media'
 
-TEMPLATE_DIRS = (
-    join(LIVE_STUDIO_BASE, 'templates'),
-)
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = join(LIVE_STUDIO_BASE, 'media')
-
-BUILDS_ROOT = join(LIVE_STUDIO_BASE, 'builds')
+BUILDS_ROOT = '/var/lib/live-studio'
 BUILDS_URL = '/builds'
