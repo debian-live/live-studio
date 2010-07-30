@@ -1,14 +1,18 @@
+from __future__ import with_statement
+
 import os
 import sys
 import time
+import daemon
 import shutil
 import logging
 import datetime
 import tempfile
+import lockfile
 import subprocess
 
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import NoArgsCommand, make_option
 
 from live_studio.build.models import Build
 from live_studio.templatetags.text import command_line_options
@@ -19,7 +23,21 @@ def call(logfile, args):
     subprocess.check_call(args, stdout=logfile, stderr=logfile)
 
 class Command(NoArgsCommand):
+    option_list = NoArgsCommand.option_list + (
+        make_option('--pidfile', dest='pidfile', help="Pidfile", default=None),
+    )
+
     def handle_noargs(self, **options):
+        if not options['pidfile']:
+            self.run(options)
+            return
+
+        pidfile = lockfile.FileLock(options['pidfile'])
+
+        with daemon.DaemonContext(pidfile=pidfile):
+            self.run(options)
+
+    def run(self, options):
         logging.basicConfig(level=logging.INFO)
         self.log = logging.getLogger('live-studio-runner')
 
