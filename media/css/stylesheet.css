@@ -313,3 +313,7 @@ a.sl {
   background-image: url(project.png);
 }
 /* @end */
+
+form.add_config ul {
+  list-style: none;
+}
