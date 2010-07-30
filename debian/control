@@ -3,6 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Debian Live Project <debian-live@lists.debian.org>
 Uploaders: Chris Lamb <lamby@debian.org>
+Standards-Version: 3.9.1
 
 Package: live-studio
 Architecture: all
