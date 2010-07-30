@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Debian Live Project <debian-live@lists.debian.org>
 Uploaders: Chris Lamb <lamby@debian.org>
-Build-Depends: debhelper (>= 7), python-support, python-setuptools
+Build-Depends: debhelper (>= 7.0.50~), python-support, python-setuptools
 Standards-Version: 3.9.1
 Homepage: http://live.debian.net/devel/live-studio/
 Vcs-Browser: http://live.debian.net/gitweb/?p=live-studio.git
