@@ -1,3 +1,4 @@
 usr/
 media /usr/share/live-studio/htdocs
+templates /usr/share/live-studio
 config/live-studio-nginx /etc/nginx/sites-available
