@@ -10,4 +10,5 @@ Description: Web pages etc. for live-studio
 
 Package: live-studio-runner
 Architecture: all
+Depends: python-daemon
 Description: Queue runner for live-studio
