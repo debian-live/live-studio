@@ -23,3 +23,10 @@ try:
     INSTALLED_APPS.append('django_extensions')
 except ImportError:
     pass
+
+try:
+    import debug_toolbar
+
+    INSTALLED_APPS.append('debug_toolbar')
+except ImportError:
+    pass

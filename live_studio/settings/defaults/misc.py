@@ -61,3 +61,5 @@ ROOT_URLCONF = 'live_studio.urls'
 LOGIN_REDIRECT_URL = '/configs'
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+INTERNAL_IPS = ('127.0.0.1',)

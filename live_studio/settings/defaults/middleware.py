@@ -1,4 +1,4 @@
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -6,4 +6,13 @@ MIDDLEWARE_CLASSES = (
 
     'live_studio.auth.middleware.RequireLoginMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-)
+]
+
+try:
+    import debug_toolbar
+
+    MIDDLEWARE_CLASSES.append(
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+except ImportError:
+    pass
