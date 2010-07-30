@@ -10,6 +10,7 @@
 <input type="submit" value="Build">
 </form>
 
+{% if config.builds.exists %}
 <table cellpadding="5">
 <tr>
   <th>#</th>
@@ -45,6 +46,7 @@
 </tr>
 {% endfor %}
 </table>
+{% endif %}
 
 <p><a href="{% url config:edit config.pk %}">Edit</a></p>
 
