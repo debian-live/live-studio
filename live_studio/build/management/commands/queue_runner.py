@@ -24,6 +24,7 @@ def call(logfile, args):
 class Command(NoArgsCommand):
     option_list = NoArgsCommand.option_list + (
         make_option('--pidfile', dest='pidfile', help="Pidfile", default=None),
+        make_option('--logfile', dest='logfile', help="Log file", default=None),
     )
 
     def handle_noargs(self, **options):
@@ -65,7 +66,7 @@ class Command(NoArgsCommand):
         self.run(options)
 
     def run(self, options):
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(filename=options['logfile'], level=logging.INFO)
         self.log = logging.getLogger('live-studio-runner')
 
         if int(options['verbosity']) > 1:

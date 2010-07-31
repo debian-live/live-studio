@@ -31,7 +31,9 @@ case "$1" in
 		--quiet \
 		--umask 007 \
 		--pidfile ${PIDFILE} \
-		--exec /usr/bin/python -- ${DAEMON} queue_runner --pidfile ${PIDFILE}
+		--exec /usr/bin/python -- ${DAEMON} queue_runner \
+			--pidfile ${PIDFILE} \
+			--logfile /var/log/live-studio-runner.log
 	then
 		echo "$NAME."
 	else
