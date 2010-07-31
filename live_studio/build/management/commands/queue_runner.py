@@ -76,6 +76,11 @@ class Command(NoArgsCommand):
                     self.log.debug('Updating #%d with %r', build.pk, kwargs)
                     Build.objects.filter(pk=build.pk).update(**kwargs)
 
+                    # Also set attributes on the local object so the are up to
+                    # date
+                    for k, v in kwargs.iteritems():
+                        setattr(build, k, v)
+
                 update(started=datetime.datetime.now())
 
                 tempdir = tempfile.mkdtemp(prefix='live-studio_')
