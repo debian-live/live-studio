@@ -63,9 +63,6 @@ class Command(NoArgsCommand):
             f.write(str(os.getpid()))
             f.close()
 
-        self.run(options)
-
-    def run(self, options):
         logging.basicConfig(filename=options['logfile'], level=logging.INFO)
         self.log = logging.getLogger('live-studio-runner')
 
@@ -74,96 +71,105 @@ class Command(NoArgsCommand):
 
         while True:
             try:
-                build = Build.objects.pop()
+                self.run()
+            except Exception:
+                self.log.exception("Caught exception")
 
-                def update(**kwargs):
-                    self.log.debug('Updating #%d with %r', build.pk, kwargs)
-                    Build.objects.filter(pk=build.pk).update(**kwargs)
+    def run(self):
+        try:
+            build = Build.objects.pop()
+        except IndexError:
+            self.log.debug('No items in queue, sleeping for 2s')
 
-                    # Also set attributes on the local object so the are up to
-                    # date
-                    for k, v in kwargs.iteritems():
-                        setattr(build, k, v)
+            try:
+                time.sleep(2)
+            except KeyboardInterrupt:
+                sys.exit(1)
 
-                update(started=datetime.datetime.now())
+            return
 
-                tempdir = tempfile.mkdtemp(prefix='live-studio_')
-                target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
+        def update(**kwargs):
+            self.log.debug('Updating #%d with %r', build.pk, kwargs)
+            Build.objects.filter(pk=build.pk).update(**kwargs)
 
-                os.makedirs(target_dir)
-                logfile = open(os.path.join(target_dir, 'log.txt'), 'a')
+            # Also set attributes on the local object so the are up to date
+            for k, v in kwargs.iteritems():
+                setattr(build, k, v)
 
-                self.log.info("Building #%d in %s", build.pk, tempdir)
+        update(started=datetime.datetime.now())
 
-                status = 'failure'
+        tempdir = tempfile.mkdtemp(prefix='live-studio_')
+        target_dir = os.path.join(settings.BUILDS_ROOT, build.ident)
 
-                try:
-                    os.chdir(tempdir)
+        os.makedirs(target_dir)
+        logfile = open(os.path.join(target_dir, 'log.txt'), 'a')
 
-                    call(logfile, ('lh', 'config') + build.config.options())
+        self.log.info("Building #%d in %s", build.pk, tempdir)
 
-                    if settings.DEBUG:
-                        open('binary.iso', 'w').write('iso here')
-                    else:
-                        call(logfile, ('lh', 'build'))
+        try:
+            filename = self.build(build, tempdir, logfile, target_dir)
 
-                    # Find file that was created
-                    filename = None
-                    for extension in ('iso', 'img'):
-                        if not os.path.exists('binary.%s' % extension):
-                            continue
+            update(
+                filename=filename,
+                finished=datetime.datetime.now(),
+            )
 
-                        filename = 'Debian_Live_Studio_%s.%s' % \
-                            (build.ident, extension)
+            status = 'success'
+            self.log.info("#%d built successfully", build.pk)
 
-                        os.rename(
-                            'binary.%s' % extension,
-                            os.path.join(target_dir, filename),
-                        )
+        except:
+            status = 'failure'
+            update(finished=datetime.datetime.now())
+            self.log.error("#%d failed to build", build.pk)
+            raise
 
-                        break
+        finally:
+            os.chdir(tempdir)
+            call(logfile, ('lh', 'clean', '--purge'))
+            shutil.rmtree(tempdir)
 
-                    assert filename, "Did not create any image"
+            context = {
+                'site': Site.objects.get_current(),
+                'build': build,
+            }
 
-                    update(
-                        finished=datetime.datetime.now(),
-                        filename=filename,
-                    )
+            subject = render_to_string(
+                'builds/%s_subject.txt' % status,
+                context,
+            )
 
-                    status = 'success'
+            send_mail(
+                ''.join(subject.splitlines()),
+                render_to_string('builds/%s_body.txt' % status, context),
+                settings.DEFAULT_FROM_EMAIL,
+                (build.config.user.email,),
+            )
 
-                    self.log.info("#%d built successfully", build.pk)
-                except:
-                    self.log.exception("#%d failed", build.pk)
-                    update(finished=datetime.datetime.now())
-                    continue
-                finally:
-                    os.chdir(tempdir)
-                    call(logfile, ('lh', 'clean', '--purge'))
-                    shutil.rmtree(tempdir)
+            self.log.info("Finished processing #%d", build.pk)
 
-                    ec = {
-                        'site': Site.objects.get_current(),
-                        'build': build,
-                    }
+    def build(self, build, tempdir, logfile, target_dir):
+        os.chdir(tempdir)
 
-                    subject = render_to_string(
-                        'builds/%s_subject.txt' % status,
-                        ec,
-                    )
+        call(logfile, ('lh', 'config') + build.config.options())
 
-                    send_mail(
-                        ''.join(subject.splitlines()),
-                        render_to_string('builds/%s_body.txt' % status, ec),
-                        settings.DEFAULT_FROM_EMAIL,
-                        (build.config.user.email,),
-                    )
+        if settings.DEBUG:
+            open('binary.iso', 'w').write('iso here')
+        else:
+            call(logfile, ('lh', 'build'))
 
-                    self.log.info("Finished processing #%d", build.pk)
+        # Find file that was created, if any
+        filename = None
+        for extension in ('iso', 'img'):
+            if not os.path.exists('binary.%s' % extension):
+                continue
 
-            except IndexError:
-                self.log.debug('No items in queue, sleeping for 2s')
-                try:
-                    time.sleep(2)
-                except KeyboardInterrupt:
-                    sys.exit(1)
+            filename = 'Debian_Live_Studio_%s.%s' % (build.ident, extension)
+
+            os.rename(
+                'binary.%s' % extension,
+                os.path.join(target_dir, filename),
+            )
+
+            return filename
+
+        assert False, "Did not create any image"
