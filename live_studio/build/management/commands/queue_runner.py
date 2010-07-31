@@ -109,18 +109,18 @@ class Command(NoArgsCommand):
         try:
             filename = self.build(build, tempdir, logfile, target_dir)
 
+            status = 'success'
+            self.log.info("#%d built successfully", build.pk)
+
             update(
                 filename=filename,
                 finished=datetime.datetime.now(),
             )
 
-            status = 'success'
-            self.log.info("#%d built successfully", build.pk)
-
         except:
             status = 'failure'
-            update(finished=datetime.datetime.now())
             self.log.error("#%d failed to build", build.pk)
+            update(finished=datetime.datetime.now())
             raise
 
         finally:
