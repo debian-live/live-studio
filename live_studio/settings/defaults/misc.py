@@ -57,3 +57,5 @@ LOGIN_REDIRECT_URL = '/configs'
 ACCOUNT_ACTIVATION_DAYS = 7
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+DEFAULT_FROM_EMAIL = 'noreply@studio.debian.net'
