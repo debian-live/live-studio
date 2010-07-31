@@ -55,7 +55,7 @@ class Config(models.Model):
     )
 
     installer = models.CharField(
-        max_length=4,
+        max_length=5,
         default='false',
         choices=(
             ('false', 'No installer integration'),
