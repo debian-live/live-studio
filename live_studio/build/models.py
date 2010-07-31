@@ -15,7 +15,7 @@ class Build(models.Model):
     started = models.DateTimeField(null=True)
     finished = models.DateTimeField(null=True)
 
-    filename = models.CharField(max_length=50)
+    filename = models.CharField(max_length=100)
 
     objects = BuildManager()
 

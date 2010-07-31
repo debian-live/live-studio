@@ -102,7 +102,9 @@ class Command(NoArgsCommand):
                         if not os.path.exists('binary.%s' % extension):
                             continue
 
-                        filename = '%s.%s' % (build.ident, extension)
+                        filename = 'Debian_Live_Studio_%s.%s' % \
+                            (build.ident, extension)
+
                         os.rename(
                             'binary.%s' % extension,
                             os.path.join(target_dir, filename),
