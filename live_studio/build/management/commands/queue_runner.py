@@ -121,8 +121,8 @@ class Command(NoArgsCommand):
 
                     self.log.info("#%d built successfully", build.pk)
                 except:
-                    update(finished=datetime.datetime.now())
                     self.log.exception("#%d failed", build.pk)
+                    update(finished=datetime.datetime.now())
                     continue
                 finally:
                     os.chdir(tempdir)
