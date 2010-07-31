@@ -1,0 +1,15 @@
+
+Hi,
+
+Your Debian Live Studio build completed successfully. You may
+download it here:
+
+ http://{{ site.domain }}{{ build.result_url }}
+
+You can also view the build log:
+
+ http://{{ site.domain }}{{ build.log_url }}
+
+Alternatively, you can adjust and rebuild your configuration:
+
+ http://{{ site.domain }}{{ build.config.get_absolute_url }}

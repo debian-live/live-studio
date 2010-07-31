@@ -8,7 +8,10 @@ import tempfile
 import subprocess
 
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.core.management.base import NoArgsCommand, make_option
+from django.contrib.sites.models import Site
 
 from live_studio.build.models import Build
 from live_studio.templatetags.text import command_line_options
@@ -91,6 +94,8 @@ class Command(NoArgsCommand):
 
                 self.log.info("Building #%d in %s", build.pk, tempdir)
 
+                status = 'failure'
+
                 try:
                     os.chdir(tempdir)
 
@@ -124,6 +129,8 @@ class Command(NoArgsCommand):
                         filename=filename,
                     )
 
+                    status = 'success'
+
                     self.log.info("#%d built successfully", build.pk)
                 except:
                     self.log.exception("#%d failed", build.pk)
@@ -133,6 +140,23 @@ class Command(NoArgsCommand):
                     os.chdir(tempdir)
                     call(logfile, ('lh', 'clean', '--purge'))
                     shutil.rmtree(tempdir)
+
+                    ec = {
+                        'site': Site.objects.get_current(),
+                        'build': build,
+                    }
+
+                    subject = render_to_string(
+                        'builds/%s_subject.txt' % status,
+                        ec,
+                    )
+
+                    send_mail(
+                        ''.join(subject.splitlines()),
+                        render_to_string('builds/%s_body.txt' % status, ec),
+                        settings.DEFAULT_FROM_EMAIL,
+                        (build.config.user.email,),
+                    )
 
                     self.log.info("Finished processing #%d", build.pk)
 

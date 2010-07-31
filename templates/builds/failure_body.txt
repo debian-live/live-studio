@@ -1,0 +1,12 @@
+
+Hi,
+
+Your Debian Live Studio build FAILED to build successfully.
+
+You can view the build log here:
+
+ http://{{ site.domain }}{{ build.log_url }}
+
+Alternatively, you can adjust and rebuild your configuration:
+
+ http://{{ site.domain }}{{ build.config.get_absolute_url }}
