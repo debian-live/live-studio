@@ -1,14 +1,11 @@
 import os
 import sys
 import time
-import daemon
 import shutil
 import logging
 import datetime
 import tempfile
 import subprocess
-
-from daemon import pidlockfile
 
 from django.conf import settings
 from django.core.management.base import NoArgsCommand, make_option
@@ -28,8 +25,39 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         if options['pidfile']:
-            pidfile = pidlockfile.PIDLockFile(options['pidfile'])
-            daemon.DaemonContext(pidfile=pidfile).open()
+            try:
+                pid = os.fork()
+                if pid > 0:
+                    sys.exit(0) # Exit first parent.
+            except OSError, e:
+                print >>sys.stderr, "fork #1 failed: (%d) %s" % (e.errno, e.strerror)
+                sys.exit(1)
+
+            # Decouple from parent environment.
+            os.chdir('/')
+            os.umask(0)
+            os.setsid()
+
+            # Do second fork.
+            try:
+                pid = os.fork()
+                if pid > 0:
+                    sys.exit(0)
+            except OSError, e:
+                print >>sys.stderr, "fork #2 failed: (%d) %s" % (e.errno, e.strerror)
+                sys.exit(1)
+
+            # Redirect standard file descriptors.
+            si = open('/dev/null', 'r')
+            so = open('/dev/null', 'a+')
+            se = open('/dev/null', 'a+', 0)
+            os.dup2(si.fileno(), sys.stdin.fileno())
+            os.dup2(so.fileno(), sys.stdout.fileno())
+            os.dup2(se.fileno(), sys.stderr.fileno())
+
+            f = open(options['pidfile'], 'a+')
+            f.write(str(os.getpid()))
+            f.close()
 
         self.run(options)
 

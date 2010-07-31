@@ -25,8 +25,7 @@ Description: Debian Live - Web based front-end
 
 Package: live-studio-runner
 Architecture: all
-Depends: ${misc:Depends}, live-build, live-studio (= ${binary:Version}),
- python-daemon
+Depends: ${misc:Depends}, live-build, live-studio (= ${binary:Version})
 Description: Debian Live - Web based front-end (queue runner)
  live-studio is a web frontend to the Debian Live tools. It offers users of any
  operating system to customise, build and then download a Debian Live system
