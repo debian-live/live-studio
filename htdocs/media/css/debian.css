@@ -151,9 +151,6 @@ p.section {
 	display: block;
 	text-decoration: none;
 }
-#navbar a:visited {
-	color: #54638c;
-}
 #navbar a:hover
 , #navbar a:visited:hover {
 	background-color: #efefef;
