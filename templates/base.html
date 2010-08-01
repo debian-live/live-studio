@@ -10,15 +10,15 @@
 <h1 id="title"><a href="{% url static:welcome %}">Debian Live Studio</a></h1>
 <h2 id="subtitle"><a href="{% url static:welcome %}">Live Debian systems!</a></h2>
 
+<div id="body">
+
 {% if messages %}
-<ul>
+<ul style="list-style: none">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li class="{{ message.tags }}" style="border: 5px black solid; background-color: yellow; padding: 1em">{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
-
-<div id="body">
 
   {% if request.user.is_authenticated %}
   <div class="actions" style="float: right">
