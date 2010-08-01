@@ -24,7 +24,12 @@
 
   <div id="navbar">
     <ul>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url config:configs %}">Configurations</a></li>
+      {% else %}
       <li><a href="{% url static:welcome %}">Home</a></li>
+      {% endif %}
+
       <li><a href="{% url static:faq %}">FAQ</a></li>
 
       {% if request.user.is_authenticated %}
