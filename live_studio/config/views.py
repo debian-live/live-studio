@@ -26,7 +26,8 @@ def edit(request, config_id):
 
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, 'Configuration saved.')
+            messages.add_message(request, messages.INFO,
+                "Configuration saved.")
 
             return HttpResponseRedirect(config.get_absolute_url())
     else:
