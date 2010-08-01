@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-{{ block.super }} &raquo; <a href="{% url config:configs %}">Configurations</a> &raquo; <em>{{ config.name }}</em>
+{{ block.super }} &raquo; <a href="{% url config:configs %}">My configurations</a> &raquo; <em>{{ config.name }}</em>
 {% endblock %}
 
 {% block content %}
