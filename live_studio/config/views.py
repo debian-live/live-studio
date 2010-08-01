@@ -47,7 +47,7 @@ class NewConfigWizard(FormWizard):
         config.save()
 
         messages.add_message(request, messages.INFO,
-            'New configuration added.')
+            "New configuration added. Press 'Build' to create your image.")
 
         return HttpResponseRedirect(config.get_absolute_url())
 
