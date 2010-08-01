@@ -51,6 +51,11 @@
 
   </td>
 </tr>
+{% if forloop.counter == 1 and build.status == 'building' %}
+<tr>
+<td colspan="3"><div data-url="{{ build.log_url }}" id="scrolling_log" style="background-color: black; color: white; font-family: monospace; padding: 1em; width: 800px; height: 200px; overflow: scroll;"><pre></pre></td>
+</tr>
+{% endif %}
 {% endfor %}
 </table>
 {% endif %}
