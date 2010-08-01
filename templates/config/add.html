@@ -21,6 +21,8 @@
 
 <h1>{% block add_title %}Missing "add_title" block override {% endblock %}</h1>
 
+<div style="min-height: 180px">
+
 <form class="add_config" action="" method="POST">{% csrf_token %}
 
 {% block add_content %}
@@ -28,6 +30,8 @@
 {{ form }}
 </table>
 {% endblock %}
+
+</div>
 
 <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
 {{ previous_fields|safe }}
