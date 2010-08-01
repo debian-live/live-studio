@@ -145,7 +145,7 @@ p.section {
 }
 #navbar a:link
 , #navbar a:visited {
-	padding: 2em 1em 0.25em 1em;
+	padding: 1.5em 1em 0.25em 1em;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
 	display: block;
