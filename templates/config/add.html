@@ -6,9 +6,7 @@
 
 {% block content %}
 
-<h3>Add new configuration</h3>
-
-<h2>{{ step }}. {% block add_title %}Missing "add_title" block override {% endblock %}</h2>
+<h1>{{ step }}. {% block add_title %}Missing "add_title" block override {% endblock %}</h1>
 
 <form class="add_config" action="" method="POST">{% csrf_token %}
 
