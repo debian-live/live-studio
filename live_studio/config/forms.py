@@ -14,6 +14,7 @@ PAGES = (
     ('architecture',),
     ('installer',),
     ('locale', 'keyboard_layout'),
+    ('name',),
 )
 
 WIZARD_FORMS = []
