@@ -22,6 +22,7 @@ class Config(models.Model):
             ('gnome-desktop',   'GNOME desktop environment'),
             ('kde-desktop',     'KDE desktop environment'),
             ('xfce-desktop',    'Xfce desktop environment'),
+            ('lxde-desktop',    'LXDE desktop environment'),
             ('rescue',          'Debian GNU/Linux rescue image'),
         ),
     )
