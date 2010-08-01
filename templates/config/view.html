@@ -14,13 +14,19 @@
 <table cellpadding="5">
 <tr>
   <th>#</th>
-  <th>Enqueued</th>
+  <th>Enqueued/Built</th>
   <th>Status</th>
 </tr>
 {% for build in config.builds.all %}
 <tr>
   <td>{{ build.pk }}</td>
-  <td>{{ build.enqueued|timesince }} ago</td>
+  <td>
+    {% if build.status == "waiting" or build.status == "building" %}
+      {{ build.enqueued|timesince }} ago
+    {% else %}
+      {{ build.finished|timesince }} ago
+    {% endif %}
+  </td>
   <td>
     {% if build.status == "waiting" %}
       <em>Waiting for builder to become available..</em>
