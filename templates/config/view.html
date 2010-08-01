@@ -19,49 +19,57 @@
 <div style="clear: both"></div>
 
 {% if config.builds.exists %}
-<h3>Build history</h3>
-<table cellpadding="5">
-<tr>
-  <th>#</th>
-  <th>Enqueued/Built</th>
-  <th>Status</th>
-</tr>
+<h2>Build history</h2>
+
+<table class="vendors" summary=""> 
+<tr> 
+  <th>Build #</th> 
+  <th>Enqueued</th> 
+  <th>Status</th> 
+  <th>&nbsp;</th> 
+  <th>&nbsp;</th> 
+  <th>&nbsp;</th> 
+</tr> 
+
 {% for build in config.builds.all %}
-<tr>
+<tr class="{{ build.status }}">
   <td>{{ build.pk }}</td>
-  <td>
-    {% if build.status == "waiting" or build.status == "building" %}
-      {{ build.enqueued|timesince }} ago
-    {% else %}
-      {{ build.finished|timesince }} ago
-    {% endif %}
-  </td>
-  <td>
-    {% if build.status == "waiting" %}
-      <em>Waiting for builder to become available..</em>
-    {% endif %}
+  <td><abbr title="{{ build.enqueued }}">{{ build.enqueued|timesince }} ago</abbr></td>
 
-    {% if build.status == "building" %}
-      <em>Building...</em> ({{ build.started|timesince }})
-      <a href="{{ build.log_url}}">Log</a>
-    {% endif %}
+  {% if build.status == "waiting" %}
+  <td><em>Waiting for builder to become available..</em></td>
+  <td colspan="2"><small>Waiting for {{ build.enqueued|timesince }}</small><td>
+  {% endif %}
 
-    {% if build.status == "failure" %}
-      <strong>Build failed!</strong> 
-      <a href="{{ build.log_url}}">Log</a>
-    {% endif %}
+  {% if build.status == "building" %}
+  <td><em>Building...</em></td>
+  <td><small>Building for {{ build.started|timesince }}</small></td>
+  <td colspan="2"><a href="{{ build.log_url }}">Log</a></td>
+  {% endif %}
 
-    {% if build.status == "success" %}
-      <strong>Finished.</strong>
-      <a href="{{ build.result_url}}">Download</a>
-      <a href="{{ build.log_url}}">Log</a>
-    {% endif %}
+  {% if build.status == "failure" %}
+  <td><span style="color: red; font-weight: bold">Failed</span></td>
+  <td><small>Build time: {{ build.started|timesince:build.finished }}</small></td>
+  <td colspan="2"><a href="{{ build.log_url}}">Log</a></td>
+  {% endif %}
 
-  </td>
+  {% if build.status == "success" %}
+  <td><span style="color: green; font-weight: bold">Build successful</span></td>
+  <td><small>Build time: {{ build.started|timesince:build.finished }}</small></td>
+  <td><a href="{{ build.log_url}}">Log</a></td>
+  <td><a href="{{ build.result_url}}">Download</a></td>
+  {% endif %}
+
 </tr>
 {% endfor %}
 </table>
+{% else %}
+
+<p><em>You have not built this configuration yet. Click "Build" above to begin.</em></p>
+
 {% endif %}
+
+<h2><tt>live-build</tt> equivalent command</h2>
 
 <p style="font-family: monospace">$ lh config {{ config.options|command_line_options }} &amp;&amp; sudo lh build</tt></p>
 
