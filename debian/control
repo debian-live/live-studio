@@ -13,8 +13,8 @@ XS-Python-Version: >= 2.5
 Package: live-studio
 Architecture: all
 Depends:
- ${misc:Depends}, gunicorn, libjs-jquery, nginx, python-django (>= 1.2),
- python-django-registration, python-psycopg2,
+ ${misc:Depends}, gunicorn, libjs-jquery (>= 1.4.2), nginx,
+ python-django (>= 1.2), python-django-registration, python-psycopg2,
 Description: Debian Live - Web based front-end
  live-studio is a web frontend to the Debian Live tools. It offers users of any
  operating system to customise, build and then download a Debian Live system
