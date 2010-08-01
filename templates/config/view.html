@@ -7,7 +7,7 @@
 <h1>Config: <em>{{ config.name }}</em></h1>
 
 <form action="{% url build:enqueue config.pk %}" method="post">
-<input type="submit" value="Build">
+<input type="submit" value="Build" style="font-size: 120%">
 </form>
 
 {% if config.builds.exists %}
