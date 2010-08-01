@@ -9,6 +9,7 @@ def enqueue(request, config_id):
 
     config.builds.create()
 
-    messages.add_message(request, messages.INFO, 'Enqueued.')
+    messages.add_message(request, messages.INFO,
+        "Build enqueued.")
 
     return HttpResponseRedirect(config.get_absolute_url())
