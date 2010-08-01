@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h1>Config: <em>{{ config.name }}</em></h1>
+<h1><em>{{ config.name }}</em></h1>
 
 <form action="{% url build:enqueue config.pk %}" method="post">
 <input type="submit" value="Build" style="font-size: 120%">
