@@ -6,7 +6,7 @@ DEBUG = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-MEDIA_ROOT = join(_BASE, 'media')
+MEDIA_ROOT = join(_BASE, 'htdocs', 'media')
 BUILDS_ROOT = join(_BASE, 'builds')
 TEMPLATE_DIRS = (join(_BASE, 'templates'),)
 

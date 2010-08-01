@@ -1,4 +1,4 @@
 usr/
-media /usr/share/live-studio/htdocs
+htdocs /usr/share/live-studio
 templates /usr/share/live-studio
 config/live-studio-nginx /etc/nginx/sites-available
