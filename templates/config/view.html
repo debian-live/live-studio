@@ -9,8 +9,14 @@
 <h1><em>{{ config.name }}</em></h1>
 
 <form action="{% url build:enqueue config.pk %}" method="post">
-<input type="submit" value="Build" style="font-size: 120%">
+<input type="submit" value="Build" style="font-size: 120%; float: left; font-weight: bold">
 </form>
+
+<form action="{% url config:edit config.pk %}" method="get">
+<input type="submit" value="Edit" style="font-size: 120%; float: left">
+</form>
+
+<div style="clear: both"></div>
 
 {% if config.builds.exists %}
 <h3>Build history</h3>
@@ -56,8 +62,6 @@
 {% endfor %}
 </table>
 {% endif %}
-
-<p><a href="{% url config:edit config.pk %}">Edit</a></p>
 
 <p style="font-family: monospace">$ lh config {{ config.options|command_line_options }} &amp;&amp; sudo lh build</tt></p>
 
