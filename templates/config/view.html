@@ -22,21 +22,21 @@
   <td>{{ build.pk }}</td>
   <td>{{ build.enqueued|timesince }} ago</td>
   <td>
-    {% if build.status == "waiting"%}
+    {% if build.status == "waiting" %}
       <em>Waiting for builder to become available..</em>
     {% endif %}
 
-    {% if build.status == "building"%}
+    {% if build.status == "building" %}
       <em>Building...</em> ({{ build.started|timesince }})
       <a href="{{ build.log_url}}">Log</a>
     {% endif %}
 
-    {% if build.status == "failure"%}
+    {% if build.status == "failure" %}
       <strong>Build failed!</strong> 
       <a href="{{ build.log_url}}">Log</a>
     {% endif %}
 
-    {% if build.status == "success"%}
+    {% if build.status == "success" %}
       <strong>Finished.</strong>
       <a href="{{ build.result_url}}">Download</a>
       <a href="{{ build.log_url}}">Log</a>
