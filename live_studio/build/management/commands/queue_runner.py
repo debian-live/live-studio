@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import shutil
+import signal
 import logging
 import datetime
 import tempfile
@@ -76,6 +77,8 @@ class Command(NoArgsCommand):
                 self.log.exception("Caught exception")
 
     def run(self):
+        signal.signal(signal.SIGTERM, signal.SIG_DFL)
+
         try:
             build = Build.objects.pop()
         except IndexError:
@@ -87,6 +90,8 @@ class Command(NoArgsCommand):
                 sys.exit(1)
 
             return
+
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
 
         def update(**kwargs):
             self.log.debug('Updating #%d with %r', build.pk, kwargs)
