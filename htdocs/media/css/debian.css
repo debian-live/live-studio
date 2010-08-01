@@ -363,7 +363,7 @@ acronym, abbr {
 .toc {
 	font-size: 0.75em;
 	list-style:none;
-	background-image: url('Pics/greydot.png');
+	background-image: url('../img/ggreydot.png');
 	background-position: bottom left;
 	background-repeat: repeat-x;
 	line-height:1.833;
@@ -372,7 +372,7 @@ acronym, abbr {
 	margin: 2em 0 2em 0;
 }
 .toc li {
-	background-image: url('Pics/greydot.png');
+	background-image: url('../img/ggreydot.png');
 	background-position: top left;
 	background-repeat: repeat-x;
 	padding: 0.0833em 0 0.0833em 0;
@@ -609,7 +609,7 @@ div.downloads .col50 {
 ul.downlist {
 	padding-left: 30px;
 	text-indent:0;
-	background: url('Pics/emblem-downloads.png') no-repeat 0 0.15em;
+	background: url('../img/emblem-downloads.png') no-repeat 0 0.15em;
 	/* 
 	 * border-top: 0.17em solid #339900;
 	 */
@@ -648,16 +648,16 @@ div.tip p
 	margin: 1em 0 1em 0;
 }
 div.tip {
-	background-image: url('Pics/admon-tip.png');
+	background-image: url('../img/admon-tip.png');
 }
 div.important{
-	background-image: url('Pics/admon-important.png');
+	background-image: url('../img/admon-important.png');
 }
 div.warning {
-	background-image: url('Pics/admon-warning.png');
+	background-image: url('../img/admon-warning.png');
 }
 div.note {
-	background-image: url('Pics/admon-note.png');
+	background-image: url('../img/admon-note.png');
 }
 
 /* Layout Elements */
@@ -722,7 +722,7 @@ table th {
 	padding-right: 1.5em;
 }
 table.vendors td {
-	background-image: url(Pics/greydot.png);
+	background-image: url(../img/greydot.png);
 	background-position: top left;
 	background-repeat: repeat-x;
 }
