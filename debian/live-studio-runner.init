@@ -44,7 +44,7 @@ case "$1" in
 	echo -n "Stopping ${DESC}: "
 	if start-stop-daemon \
 		--stop \
-		--retry 10 \
+		--retry 3600 \
 		--quiet \
 		--oknodo \
 		--pidfile ${PIDFILE}
