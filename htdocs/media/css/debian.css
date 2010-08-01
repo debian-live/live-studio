@@ -237,6 +237,9 @@ a img {
 	margin:0;
 	padding:0;
 }
+#second-nav li.active {
+	font-weight: bold;
+}
 #second-nav p {
 	line-height: 2;
 	font-weight: bold;

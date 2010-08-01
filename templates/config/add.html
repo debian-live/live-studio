@@ -6,7 +6,18 @@
 
 {% block content %}
 
-<h1>{{ step }}. {% block add_title %}Missing "add_title" block override {% endblock %}</h1>
+<div id="second-nav"> 
+<ol>
+  <li class="{% if step == 1 %}active{% endif %}">Image type</li>
+  <li class="{% if step == 2 %}active{% endif %}">Select distribution</li>
+  <li class="{% if step == 3 %}active{% endif %}">Media type</li>
+  <li class="{% if step == 4 %}active{% endif %}">Architecture</li>
+  <li class="{% if step == 5 %}active{% endif %}">Debian Installer</li>
+  <li class="{% if step == 6 %}active{% endif %}">Locale</li>
+</ul>
+</div>
+
+<h1>{% block add_title %}Missing "add_title" block override {% endblock %}</h1>
 
 <form class="add_config" action="" method="POST">{% csrf_token %}
 
