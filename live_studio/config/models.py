@@ -15,14 +15,14 @@ class Config(models.Model):
     )
 
     base = models.CharField(
-        max_length=8,
+        max_length=50,
         default='standard',
         choices=(
-            ('standard',    'Standard Debian GNU/Linux image'),
-            ('gnome',       'GNOME desktop environment'),
-            ('kde',         'KDE desktop environment'),
-            ('xfce',        'Xfce desktop environment'),
-            ('rescue',      'Debian GNU/Linux rescue image'),
+            ('standard',        'Standard Debian GNU/Linux image'),
+            ('gnome-desktop',   'GNOME desktop environment'),
+            ('kde-desktop',     'KDE desktop environment'),
+            ('xfce-desktop',    'Xfce desktop environment'),
+            ('rescue',          'Debian GNU/Linux rescue image'),
         ),
     )
 
