@@ -97,16 +97,11 @@ body {
 #breadcrumbs {
 	margin:0;
 	font-size: 0.75em;
-	text-transform: lowercase;
 	line-height: 2;
 	background-color: transparent;
 	background-color: #f5f6f7;
 	border-bottom: 1px solid #d2d3d7 ;
-}
-#breadcrumbs:before {
-	content: "/";
-	margin-left: 0.5em;
-	margin-right: 0.5em;
+	padding-left: 1.5em;
 }
 p.section {
 	margin: 0;
