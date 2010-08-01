@@ -358,7 +358,7 @@ acronym, abbr {
 .toc {
 	font-size: 0.75em;
 	list-style:none;
-	background-image: url('../img/ggreydot.png');
+	background-image: url('../img/greydot.png');
 	background-position: bottom left;
 	background-repeat: repeat-x;
 	line-height:1.833;
@@ -367,7 +367,7 @@ acronym, abbr {
 	margin: 2em 0 2em 0;
 }
 .toc li {
-	background-image: url('../img/ggreydot.png');
+	background-image: url('../img/greydot.png');
 	background-position: top left;
 	background-repeat: repeat-x;
 	padding: 0.0833em 0 0.0833em 0;
