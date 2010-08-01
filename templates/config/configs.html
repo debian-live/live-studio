@@ -5,18 +5,25 @@
 {% endblock %}
 
 {% block content %}
-<h1>List of configurations</h1>
+<h1>My configurations</h1>
 
-<p><strong><a href="{% url config:add %}">Add new configuration</a></strong></p>
+<p>A <em>configuration</em> is a set of properties that defines your Live
+system. This page lists your saved Debian Live Studio configurations. You can
+return here and rebuild them at any time.</p>
 
-<table>
+{% if request.user.configs.exists %}
+  <ul>
+  {% for config in request.user.configs.all %}
+    <li>
+      <a href="{{ config.get_absolute_url }}">{{ config.name }}</a>
+      <small>Added {{ config.created|timesince }} ago</small>
+    </li>
+  {% endfor %}
+  </ul>
 
-{% for config in request.user.configs.all %}
-<tr>
- <td><a href="{{ config.get_absolute_url }}">{{ config.name }}</td>
-</tr>
-{% endfor %}
-
-</table>
+  <p><strong><a href="{% url config:add %}">Add new configuration</a></strong></p>
+{% else %}
+  <div class="tip"><p>You have no saved configurations. <a href="{% url config:add %}">Add one</a>.</p></div>
+{% endif %}
 
 {% endblock %}
