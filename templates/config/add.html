@@ -16,7 +16,9 @@
 
 <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
 {{ previous_fields|safe }}
-<input type="submit" value="{% block next %}Next{% endblock %}">
+<input type="submit" value="{% block next %}Next &raquo;{% endblock %}" style="margin: 1em; padding: 0.5em; font-size: 120%; float: right; clear: both; width: 200px">
 </form>
+
+<div style="clear: both"></div>
 
 {% endblock %}
