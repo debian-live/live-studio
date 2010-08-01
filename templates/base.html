@@ -40,13 +40,10 @@
 </div>
 
 <div id="outer">
-  {% if messages %}
-  <ul style="list-style: none">
-      {% for message in messages %}
-      <li class="{{ message.tags }}" style="border: 5px black solid; background-color: yellow; padding: 1em">{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
+
+  {% for message in messages %}
+    <div class="tip"><p>{{ message }}</p></div> 
+  {% endfor %}
 
   <div id="inner">
     {% block content %}{% endblock %}
