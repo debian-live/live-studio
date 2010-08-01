@@ -355,8 +355,8 @@ cite {
 	color: #444;
 }
 acronym, abbr {
-	text-transform: uppercase;
 	font-size: 0.9em;
+	border-bottom:1px dotted #000;
 }
 .toc {
 	font-size: 0.75em;
