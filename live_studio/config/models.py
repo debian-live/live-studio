@@ -76,6 +76,9 @@ class Config(models.Model):
         choices=data.KEYBOARD_LAYOUTS,
     )
 
+    class Meta:
+        ordering = ('-created',)
+
     def __unicode__(self):
         return "%s: name=%s" % (self.user.username, self.name)
 
