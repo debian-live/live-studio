@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block breadcrumbs %}
+{{ block.super }} &raquo; Configurations
+{% endblock %}
+
 {% block content %}
 <h1>List of configurations</h1>
 

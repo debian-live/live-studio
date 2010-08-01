@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block breadcrumbs %}
+{{ block.super }} &raquo; <a href="{% url config:configs %}">Configurations</a> &raquo; "{{ config.name }}"
+{% endblock %}
 
-<p><a href="{% url config:configs %}">&laquo; Back to list of configurations</a></p>
+{% block content %}
 
 <h1>Config: <em>{{ config.name }}</em></h1>
 
