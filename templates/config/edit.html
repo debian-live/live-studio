@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block breadcrumbs %}
+{{ block.super }} &raquo; <a href="{% url config:configs %}">Configurations</a> &raquo; <em><a href="{{ config.get_absolute_url }}">{{ config.name }}</a></em> &raquo; Edit
+{% endblock %}
+
 {% block content %}
 
 <h1>Editing config: <em>{{ config.name }}</em></h1>
