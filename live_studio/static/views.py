@@ -10,3 +10,7 @@ def welcome(request):
         return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
 
     return render_response(request, 'static/welcome.html', {})
+
+@login_not_required
+def faq(request):
+    return render_response(request, 'static/faq.html', {})
