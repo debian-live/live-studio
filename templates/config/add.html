@@ -17,6 +17,8 @@
 </ul>
 </div>
 
+<div id="maincol">
+
 <h1>{% block add_title %}Missing "add_title" block override {% endblock %}</h1>
 
 <form class="add_config" action="" method="POST">{% csrf_token %}
@@ -33,5 +35,7 @@
 </form>
 
 <div style="clear: both"></div>
+
+</div>
 
 {% endblock %}
