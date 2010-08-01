@@ -27,7 +27,7 @@
       <li><a href="{% url static:welcome %}">Home</a></li>
 
       {% if request.user.is_authenticated %}
-      <li><a href="{% url auth_logout %}">Login</a></li>
+      <li><a href="{% url auth_logout %}">Logout</a></li>
       {% else %}
       <li><a href="{% url auth_login %}">Login</a></li>
       <li><a href="{% url registration_register %}">Register</a></li>
