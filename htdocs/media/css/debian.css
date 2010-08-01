@@ -151,13 +151,6 @@ p.section {
 	display: block;
 	text-decoration: none;
 }
-#navbar a:hover
-, #navbar a:visited:hover {
-	background-color: #efefef;
-	border-left: 1px solid  #d2d3d7;
-	border-right: 1px solid #d2d3d7;
-	text-decoration: underline;
-}
 #searchbox {
 	text-align:left;
 	line-height: 1;
@@ -198,11 +191,6 @@ p.section {
 	position: absolute;
 	bottom: 0.3em;
 	overflow: auto;
-}
-#logo:hover {
-	border: 1px solid #d2d3d7 ;
-	border-top: 0;
-	background-color: #eee;
 }
 
 /* Links */
