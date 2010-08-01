@@ -1,6 +1,6 @@
 server {
 	listen			80;
-	server_name		178.79.130.78;
+	server_name		studio.debian.net;
 	root			/usr/share/live-studio/htdocs;
 
 	location ~ ^/(?:favicon\.ico$|robots\.txt$|media) {
