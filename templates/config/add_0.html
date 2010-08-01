@@ -6,13 +6,13 @@
 
 <p>What type of image would you like to build?</p>
 
-{{ form.base }}
-
-<p>
+<p style="float: right">
 <img src="{% static "img/debian.png" %}" height="50">
 <img src="{% static "img/gnome.png" %}" height="50">
 <img src="{% static "img/kde.png" %}" height="50">
 <img src="{% static "img/xfce.png" %}" height="50">
 </p>
+
+{{ form.base }}
 
 {% endblock %}
