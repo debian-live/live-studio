@@ -67,6 +67,8 @@ class Command(NoArgsCommand):
         logging.basicConfig(filename=options['logfile'], level=logging.INFO)
         self.log = logging.getLogger('live-studio-runner')
 
+        self.log.info("Starting queue_runner")
+
         if int(options['verbosity']) > 1:
             self.log.setLevel(logging.DEBUG)
 
