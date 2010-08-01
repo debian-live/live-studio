@@ -2,7 +2,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Debian Live Studio</title>
-  <link rel="stylesheet" href="{% static "css/stylesheet.css" %}" type="text/css" />
+
+  {% block css %}
+  <link rel="stylesheet" href="{% static "css/debian.css" %}" type="text/css" />
+  {% endblock %}
 
   <script language="javascript" src="{% static "js/jquery.js" %}"></script>
   <script language="javascript" src="{% static "js/live-studio.js" %}"></script>
@@ -10,40 +13,56 @@
 
 <body>
 
-<h1 id="title"><a href="{% url static:welcome %}">Debian Live Studio</a></h1>
-<h2 id="subtitle"><a href="{% url static:welcome %}">Live Debian systems!</a></h2>
-
-<div id="body">
-
-{% if messages %}
-<ul style="list-style: none">
-    {% for message in messages %}
-    <li class="{{ message.tags }}" style="border: 5px black solid; background-color: yellow; padding: 1em">{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-  {% if request.user.is_authenticated %}
-  <div class="actions" style="float: right">
-    <p><a href="{% url config:configs %}">Home</a>
-    -
-    <a href="{% url auth_logout %}">Logout</a>
+<div id="header">
+  <div id="upperheader">
+  <div id="logo">
+  <a href="{% url static:welcome %}" title="Debian Home">
+    <img src="{% static "img/openlogo-50.png" %}" alt="Debian" width="50" height="61">
+  </a>
   </div>
+ </div>
+
+  <div id="navbar">
+    <ul>
+      <li><a href="{% url static:welcome %}">Home</a></li>
+
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url auth_logout %}">Login</a></li>
+      {% else %}
+      <li><a href="{% url auth_login %}">Login</a></li>
+      <li><a href="{% url registration_register %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+<div id="outer">
+  {% if messages %}
+  <ul style="list-style: none">
+      {% for message in messages %}
+      <li class="{{ message.tags }}" style="border: 5px black solid; background-color: yellow; padding: 1em">{{ message }}</li>
+      {% endfor %}
+  </ul>
   {% endif %}
 
-<div id="content">
-  {% block content %}{% endblock %}
-</div>
+  <div id="inner">
+    {% block content %}{% endblock %}
+  </div>
 
-<hr />
+  <div id="footer">
+  <div id="fineprint">
+    <a href="http://www.gnu.org/licenses/agpl-3.0.html"><img src="{% static "img/agplv3.png" %}" style="float: right"></a>
 
-</div>
+    <p>To report a problem with the web site, e-mail <a href="mailto:debian-live@lists.debian.org">debian-live@lists.debian.org</a>. For other contact information, see the <a href="http://live.debian.net">Debian Live homepage</a>.</p>
 
-<div class="footer">
-  <p>
-    <a href="http://live.debian.net/">Debian Live Project</a>
-    &lt;<a href="mailto:debian-live@lists.debian.org">debian-live@lists.debian.org</a>&gt;
-  </p>
+    <p>
+      Copyright &copy; 2010 <a href="http://chris-lamb.co.uk/">Chris Lamb</a>. Released under the terms of the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License></a> version 3 or greater.
+      <br>
+      Debian is a registered <a href="http://www.debian.org/trademark">trademark</a> of Software in the Public Interest, Inc.
+    </p>
+  </div>
+  </div>
+
 </div>
 
 </body>

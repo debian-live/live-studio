@@ -2,11 +2,16 @@
 
 {% block content %}
 
-<h1>Register</h1>
+<h1>Register for Debian Live Studio</h1>
 
 <form method="post" action="">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Register">
+<table>
+{{ form }}
+<tr>
+  <td>&nbsp;</td>
+  <td><input type="submit" value="Register"></td>
+</tr>
+</table>
 </form>
 
 {% endblock %}
