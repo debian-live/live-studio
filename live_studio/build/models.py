@@ -22,6 +22,10 @@ class Build(models.Model):
     class Meta:
         ordering = ('-enqueued',)
 
+    def __unicode__(self):
+        return 'Build #%d started by %s (status: %s)' % \
+            (self.pk, self.config.user.username, self.status())
+
     def status(self):
         if self.filename:
             return 'success'
