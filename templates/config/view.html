@@ -8,6 +8,11 @@
 
 <h1><em>{{ config.name }}</em></h1>
 
+<div style="border: red 5px dotted; background-color: yellow; padding: 1em; margin: 1em; font-size: 120%; font-weight: bold">
+Non-trivial builds will likely fail as the server ran out of disk space in hours after launch.
+<br>Please <a href="http://chris-lamb.co.uk/2010/08/02/debian-live-studio/">read this</a> regarding the current hosting situation and what you can do to help.
+</div>
+
 <form action="{% url build:enqueue config.pk %}" method="post">
 <input type="submit" value="Build" style="font-size: 120%; float: left; font-weight: bold">
 </form>
