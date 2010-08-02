@@ -727,3 +727,7 @@ table.vendors td {
 #pageLang p, #pageLang form {
 	display: inline;
 }
+
+div.add_config ul {
+	list-style-type: none;
+}
