@@ -24,11 +24,13 @@
 
   <div id="navbar">
     <ul>
+      {% block home_link %}
       {% if request.user.is_authenticated %}
       <li><a href="{% url config:configs %}">My configurations</a></li>
       {% else %}
       <li><a href="{% url static:welcome %}">Home</a></li>
       {% endif %}
+      {% endblock %}
 
       <li><a href="{% url static:faq %}">FAQ</a></li>
 
