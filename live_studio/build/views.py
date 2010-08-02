@@ -10,6 +10,6 @@ def enqueue(request, config_id):
     config.builds.create()
 
     messages.add_message(request, messages.INFO,
-        "Build enqueued.")
+        "Build enqueued. You will receive an email when the build completes.")
 
     return HttpResponseRedirect(config.get_absolute_url())
